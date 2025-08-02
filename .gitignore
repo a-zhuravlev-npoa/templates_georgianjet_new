@@ -1,0 +1,6 @@
+/admin/
+static/admin/
+static/admin_m/
+static/django_tinymce/
+static/debug_toolbar/
+static/tinymce/

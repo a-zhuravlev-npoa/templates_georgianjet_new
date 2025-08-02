@@ -1,0 +1,187 @@
+<script type="text/javascript" language="javascript">
+    function getCookie(name) {
+        var cookieValue = null;
+        if (document.cookie && document.cookie != '') {
+            var cookies = document.cookie.split(';');
+            for (var i = 0; i < cookies.length; i++) {
+                var cookie = jQuery.trim(cookies[i]);
+                // Does this cookie string begin with the name we want?
+                if (cookie.substring(0, name.length + 1) == (name + '=')) {
+                    cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                    break;
+                }
+            }
+        }
+        return cookieValue;
+    }
+
+    const postData = async (url = '', data = {}) => {
+        $.ajax({
+            url: url,
+            type: 'POST',
+            contentType: false,
+            processData: false,
+            data: data,
+            dataType: 'json',
+            success: function(data) {
+
+            },
+            error:  function(xhr, str){
+                alert('Возникла ошибка: ' + xhr.responseCode);
+            }
+        });
+    }
+  
+
+    function send_form_order(form_name, btn_modal_close, btn_modal_thx, href_thx) {
+        form_data = new FormData(document.getElementById(form_name));
+        $.ajax({
+          url: '{% url 'checkout:send_form_order' %}',
+          type: 'POST',
+          contentType: false,
+          processData: false,
+          data: form_data,
+          dataType: 'json',
+          success: function(data) {
+                if(btn_modal_close)
+                {
+                    $(btn_modal_close).click(); 
+                }
+			    if(btn_modal_thx)
+                {
+                    $(btn_modal_thx).click(); 
+                }
+                else{
+                    location.href = href_thx;
+                }
+                postData("{% url 'checkout:clear_order_number' %}");
+
+                document.getElementById(form_name).reset();
+          },
+          error:  function(xhr, str){
+              alert('Возникла ошибка: ' + xhr.responseCode);
+          }
+        });
+    }
+
+    function csrfSafeMethod(method) {
+        return (/^(GET|HEAD|OPTIONS|TRACE)$/.test(method));
+    }
+
+    function $_GET(key) {
+        var p = window.location.search;
+        p = p.match(new RegExp(key + '=([^&=]+)'));
+        return p ? p[1] : false;
+    }
+
+    $.ajaxSetup({
+        beforeSend: function(xhr, settings) {
+            var csrftoken = getCookie('csrftoken');
+            if (!csrfSafeMethod(settings.type) && !this.crossDomain) {
+                xhr.setRequestHeader("X-CSRFToken", csrftoken);
+            }
+        }
+    });
+
+    function get_cart_count() {
+        $.ajax({
+              url: "{% url 'checkout:get_cart_count' %}",
+                method: "GET",
+                success: function(data) {
+                    if(document.getElementById('cart_modal_content'))
+                    {
+                        document.getElementById('cart_modal_content').innerHTML = data['cart_modal_content']; 
+                    }
+                    if(document.getElementById('cart_content'))
+                    {
+                        document.getElementById('cart_content').innerHTML = data['cart_content'];
+                    }
+                    if(document.getElementById('cart_item_count'))
+                    {
+                        document.getElementById('cart_item_count').innerHTML = '(' + data['cart_item_count'] + ')';
+                    }
+                    let productCountInCart = Number(data['cart_item_count']);
+                    if(document.getElementById('cart_order_form') && productCountInCart == 0)
+                    {
+                        document.getElementById('cart_order_form').innerHTML = '';
+                    }
+                    var cartCountList = document.querySelectorAll('.cart_count_num');
+                    for (var i=0; i < cartCountList.length; i++) {
+                        cartCountList[i].innerHTML = productCountInCart;
+                    }
+
+               }
+        });
+    }
+
+    function set_utm_info() {
+        var date = new Date(new Date().getTime() + 30 * 60 * 1000);
+        console.log(document.cookie);
+        if($_GET('utm_source')){
+            document.cookie = "utm_source_mk_progress="+ $_GET('utm_source') +"; path=/; expires=" + date.toUTCString();
+        }
+        if($_GET('utm_medium')){
+            document.cookie = "utm_medium_mk_progress="+ $_GET('utm_medium') +"; path=/; expires=" + date.toUTCString();
+        }
+        if($_GET('utm_campaign')){
+            document.cookie = "utm_campaign_mk_progress="+ $_GET('utm_campaign') +"; path=/; expires=" + date.toUTCString();
+        }
+        if($_GET('utm_content')){
+            document.cookie = "utm_content_mk_progress="+ $_GET('utm_content') +"; path=/; expires=" + date.toUTCString();
+        }
+        if($_GET('utm_term')){
+            document.cookie = "utm_term_mk_progress="+ $_GET('utm_term') +"; path=/; expires=" + date.toUTCString();
+        }
+        console.log($_GET('utm_term'));
+        console.log(document.cookie);
+        var utm_source_mk_progress = getCookie('utm_source_mk_progress');
+        var utm_medium_mk_progress = getCookie('utm_medium_mk_progress');
+        var utm_campaign_mk_progress = getCookie('utm_campaign_mk_progress');
+        var utm_content_mk_progress = getCookie('utm_content_mk_progress');
+        var utm_term_mk_progress = getCookie('utm_term_mk_progress');
+
+        let utm_items = document.getElementsByName('utm_source');
+        for(let i = 0; i < utm_items.length; i++){
+            utm_items[i].value = utm_source_mk_progress; 
+        }
+        utm_items = document.getElementsByName('utm_medium');
+        for(let i = 0; i < utm_items.length; i++){
+            utm_items[i].value = utm_medium_mk_progress; 
+        }
+        utm_items = document.getElementsByName('utm_campaign');
+        for(let i = 0; i < utm_items.length; i++){
+            utm_items[i].value = utm_campaign_mk_progress; 
+        }
+        utm_items = document.getElementsByName('utm_content');
+        for(let i = 0; i < utm_items.length; i++){
+            utm_items[i].value = utm_content_mk_progress; 
+        }
+        utm_items = document.getElementsByName('utm_term');
+        for(let i = 0; i < utm_items.length; i++){
+            utm_items[i].value = utm_term_mk_progress; 
+        }
+
+    }
+
+    $(document).ready(
+        function(){
+            get_cart_count();
+            set_utm_info();
+        }
+    )
+
+    if(getCookie("show_cookie_stmm_alum") != "True") {
+        setTimeout(function () {
+            showCookieForm();
+        }, 0);
+    };
+
+    function showCookieForm() {
+        document.getElementById('cookie_popup').style.display = 'block';
+    }
+
+    function closeCookieForm() {
+        var date = new Date(new Date().getTime() + 30 * 24 * 60 * 60 * 1000);
+        document.cookie = "show_cookie_stmm_alum=True; path=/; expires=" + date.toUTCString();
+    }
+</script>

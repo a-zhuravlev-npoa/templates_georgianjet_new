@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+{% block site_wrapper %}
+    <!-- <div class="layout"> -->
+        {% block before_header_tags %}{% endblock %}
+        {% include "element/header.html" %}
+        {% block content %}{% endblock %}
+        {% block after_content_tags %}{% endblock %}
+        {% include "element/footer.html" %}
+    <!-- </div> -->
+    <!-- BLOCK Подключение файлов с модальными окнами и символов -->
+    <!-- {% include "modal/modal_order.html" %}
+    {% include "modal/modal_add.html" %}
+    {% include "modal/modal_thanks.html" %}
+    {% include "modal/modal_thanks_subscribe.html" %}
+    {% include "modal/modal_price_list.html" %}
+    {% include "modal/modal_get_price.html" %}
+    {% include "modal/modal_404.html" %}
+    {% include "modal/modal_location.html" %}
+    {% include "modal/modal_ask.html" %}
+    {% include "element/symbols.html" %} -->
+    <!-- EMD BLOCK -->
+    {% block modal %}{% endblock %}
+{% endblock %}
