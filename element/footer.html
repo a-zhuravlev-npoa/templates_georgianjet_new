@@ -1,0 +1,162 @@
+<footer class="footer">
+            <div class="footer-wrapper">
+                <div class="footer-widgets">
+
+
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-md-4">
+                                <div class="row">
+                                    <div class="col-md-12 col-sm-6">
+
+                                        <div class="widget">
+                                            <h3 class="widget-title">{{ footer_title | safe }}</h3>
+
+                                            <div class="widget-content">
+                                                {{ footer_text | safe }}
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-md-2 col-sm-6">
+
+                                <div class="widget">
+                                    <h3 class="widget-title">{{ shopping }}</h3>
+
+                                    <ul>
+                                        {% for item in main_menus_footer %}
+                                                <li><a href="{% url 'menu:menu' item.slug %}" title="{{ item.name }}">{{ item.name }}</a>
+                                                </li>
+                                        {% endfor %}
+                                    </ul>
+                                </div>
+                                <!-- /.widget -->
+
+                            </div>
+
+                            <div class="col-md-2 col-sm-6">
+
+                                <div class="widget">
+                                    <h3 class="widget-title">{{ links_footer }}</h3>
+
+                                    <ul>
+                                        {% for item in main_menus_footer_2 %}
+                                                <li><a href="{% url 'menu:menu' item.slug %}" title="{{ item.name }}">{{ item.name }}</a>
+                                                </li>
+                                        {% endfor %}
+                                    </ul>
+                                </div>
+                                <!-- /.widget -->
+
+                            </div>
+
+                            <div class="col-md-4">
+
+                                <div class="widget">
+                                    <h3 class="widget-title">{{ social_footer }}</h3>
+
+                                    <ul class="list-socials">
+                                        {% for item in social_link %}
+                                            {% if not 'vk' in item.url %}
+                                                <li><a href="{{ item.url }}" title="{{ item.name}}" target="_blank"><i class="icon icon-{{ item.image_str }}"></i></a></li>
+                                            {% else %}
+                                                <li>
+                                                    <a href="{{ item.url }}" target="_blank" title="{{ item.name}}"><img class="soc" alt="VK" src="{{ static_url }}{{ item.image_str }}" onmouseout="this.src='{{ static_url }}{{ item.image_str }}'" onmouseover="this.src='{{ static_url }}{{ item.image_str }}'">
+                                                </a>
+                                                </li>
+                                            {% endif %}
+                                        {% endfor %}
+                                    </ul>
+                                </div>
+
+                                <div class="widget">
+
+                                        <div class="widget">
+                                            <h3 class="widget-title">{{ contacts.comment }}</h3>
+
+                                            <div class="widget-content">
+                                                <p> {{ phone }}: {{ current_filial.phone }}</p>
+                                                {% if current_filial.phone_dop %}
+                                                    <p> {{ phone_2 }}: {{ current_filial.phone_dop }}</p>
+                                                {% endif %}
+                                                <p> {{ rezhim }}: {{ current_filial.rezhim }}</p>
+                                                <p> {{ mail }}: <a href="mailto:{{ current_filial.email }}">{{ current_filial.email }}</a></p>
+                                            </div>
+                                        </div>
+                                        <!-- /.widget -->
+
+                                    </div>
+
+                            </div>
+                        </div>
+                    </div>
+
+
+                </div>
+                <!-- /.footer-widgets -->
+
+                <div class="footer-copyright">
+                    <div class="container">
+                        <div class="copyright">
+                            <p>{{ COPYRIGHT }} &copy; 2015-{{ current_year }} {{ all_right }}</p>
+                        </div>
+
+                        <div class="footer-nav">
+                            <nav>
+                                <ul>
+                                    {% for item in main_menus_footer_3 %}
+                                            <li><a href="{% url 'menu:menu' item.slug %}" title="{{ item.name }}">{{ item.name }}</a>
+                                                </li>
+                                    {% endfor %}
+
+                                </ul>
+                            </nav>
+
+                            <nav>
+                                <ul>
+                                    <li class="dropdown dropup">
+                                        <div class="language-select">
+                                            <span class="select-title">{{ lang }}</span>
+
+                                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                                <span style="text-transform: uppercase;">{{ LANGUAGE_CODE }}</span>
+                                                <span class="icon icon-arrow-down"></span>
+                                            </a>
+
+                                            <ul class="dropdown-menu" role="menu">
+                                                {% for lang in LANGUAGES %}
+                                                    <li>
+                                                      <form name="setLang{{ lang.1}}" action="/i18n/setlang/" method="POST">
+                                                      {% csrf_token %}
+                                                        <input name="next" type="hidden" value="/">
+                                                        <input type="hidden" name="language" value="{{ lang.0 }}">
+                                                        <a style="color: #000;" href="#" onclick="document.setLang{{ lang.1 }}.submit();
+                                                            return false;">{{ lang.1 }}</a>
+                                                      </form>
+                                                    </li>
+                                                {% endfor %}
+                                            </ul>
+                                        </div>
+                                    </li>
+
+                                </ul>
+                            </nav>
+                        </div>
+                    </div>
+                </div>
+                <!-- /.footer-copyright -->
+            </div>
+            <!-- /.footer-wrapper -->
+
+            <a onclick="scroll(0,0)" class="back-top" title="">
+                <span class="back-top-image">
+                    <img src="{{ static_url }}html/hosoren/img/back-top.png" alt="">
+                </span>
+
+                {{  back | safe }}
+            </a>
+            <!-- /.back-top -->
+        </footer>

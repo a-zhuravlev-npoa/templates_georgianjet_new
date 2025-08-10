@@ -17,5 +17,14 @@
     {{ page_title }}
 {% endnospaces %}{% endblock %}
 {% block content %}
+<div id="main">
+<br/><br/>
+    {% include 'block/block_slider.html' %}
+    <!-- /section -->
+    {% include 'block/block_product_main.html' %}
+    {% include 'block/block_slider_main.html' %}
+    {% include 'block/block_advantege.html' %}
+    <!-- /section -->
 
+</div>
 {% endblock %}

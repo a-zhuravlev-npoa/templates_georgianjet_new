@@ -1,0 +1,67 @@
+<table class="table table-condensed">
+        <thead>
+            <tr class="cart_menu">
+                <td class="image">{{ item }}</td>
+                <td class="description"></td>
+                <td class="price">{% comment %}{% trans "Price" %}{% endcomment %}</td>
+                <td class="quantity">{{ quantity }}</td>
+                <td class="total">{% comment %}{% trans "Total" %}{% endcomment %}</td>
+                <td></td>
+            </tr>
+        </thead>
+        <tbody>
+        {% if cart_items %}
+            {% for item in cart_items %}
+                <tr>
+                    <td class="cart_product">
+                        <a href=""><img style="height: 100px" src="{{ media_url }}{{ item.product.image }}" alt="{{ item.product.name }}" ></a>
+                    </td>
+                    <td class="cart_description">
+                        <h4><a href="{{ item.product.get_absolute_url }}">{{ item.product.name }}</a></h4>
+                        <p>Web ID: {{ item.product.id }}</p>
+                    </td>
+                    <td class="cart_price">
+                        {% comment %} <p>{{ item.product.price|currency:LANGUAGE_CODE }}</p> {% endcomment %}
+                    </td>
+                    <td class="cart_quantity">
+                        <div class="cart_quantity_button">
+                            <form method="post" action="." class="">
+                            {% csrf_token %}
+                            <input type="text" class="cart_quantity_input"  name="quantity" value="{{ item.quantity }}" id="cart_item_count_{{ item.id }}"
+                                   size="2" class="quantity" maxlength="5"/>
+                            <input type="hidden" name="item_id" value="{{ item.id }}"/>
+                            <input type="submit" name="submit" value="{{ update }}"/>
+                            </form>
+                        </div>
+                    </td>
+                    <td class="cart_total">
+                    </td>
+                    <td class="cart_delete">
+                            {% csrf_token %}
+                            <input type="button" name="submit" value="X"  onclick="product_del({{ item.id }})">
+                    </td>
+                </tr>
+             {% endfor %}
+        {% else %}
+                            <tr>
+                                <td colspan="6" style="height:30px;">
+                                    {{ empty_cart }}
+                                </td>
+                            </tr>
+
+                        {% endif %}
+					</tbody>
+                    <tfoot>
+                        {% if cart_items %}
+                            <tr>
+                                <th class="right" colspan="6">
+                                        {% csrf_token %}
+                                        <a class="btn btn-lg btn-primary btn-block" href="/checkout/">{{ checkout }}</a>
+                                </th>
+                            </tr>
+                        {% endif %}
+                        </tfoot>
+				</table>
+{% block extra_scripts %}
+  {% include 'element/product_cart_script.html'%}
+{% endblock %}
