@@ -1,0 +1,46 @@
+<div id="wrapper" class="pt_storefront">
+    <div id="main" role="main">
+        <div class="homepagerows">
+                <div class="category-row">
+                    {% for item in current_menu.get_child %}
+                        {% if item.dop_param_1 == 'slide_1' %}
+
+                                <div class="category-column  rowNum1 category-row-wide-half">
+                                    <div style="background-image: url({{ media_url }}{{ item.image }}); height: 460px;">
+                                        <div class="text-placement-right">
+                                            <div class="cta text-placement-center text-alignment-center">
+                                                <div class="title-cta lead" style="font-family: Arial; font-size: 18px; font-variant:small-caps; font-weight: normal; color: #FFF;">
+                                                    {{ item.name|safe }}
+                                                </div>
+
+                                                <a href="{% url 'menu:menu' item.slug %}" class="bottom"
+                                                   style="color: #FFF;font-family: Arial;font-weight: normal;  border: 1px solid #FFF; ">
+                                                    {{ button_text }}
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                        {% elif  item.dop_param_1 == 'slide_2' %}
+                                <div class="category-column  rowNum2 category-row-wide-half">
+                                    <div style="background-image: url({{ media_url }}{{ item.image }}); height: 460px;">
+                                        <div class="text-placement-left">
+                                            <div class="cta text-placement-bottom text-alignment-center">
+                                                <div class="title-cta lead" style="font-family: Arial; font-size: 18px; font-variant:small-caps; font-weight: normal; color: #000;">
+                                                    {{ item.name|safe }}
+                                                </div>
+
+                                                <a href="{% url 'menu:menu' item.slug %}" class="bottom"
+                                                   style="color: #000;font-family: Arial;font-weight: normal;  border: 1px solid #000; ">
+                                                    {{ button_text }}
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                        {% endif %}
+                    {% endfor %}
+            </div>
+        </div>
+    </div>
+ </div>

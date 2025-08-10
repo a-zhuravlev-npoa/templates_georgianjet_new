@@ -1,0 +1,29 @@
+<section>
+    <div class="container">
+    <br/><br/><br/>
+
+
+    <div class="row">
+        {% for item in current_menu.get_child %}
+            {% if item.flag_group_2 %}
+                <div class="col-md-3 col-sm-6 col-xs-6">
+                    <div class="awe-media">
+                        <div class="awe-media-image">
+                            <a href="{% url 'menu:menu' item.slug %}" title="{{ item.name }}">
+                                <img src="{{ media_url }}{{ item.image }}" alt="{{ item.name }}">
+                            </a>
+                        </div>
+                        <!-- /.awe-media-image -->
+                        <div class="awe-media-body center margin-vertical-20">
+                            <strong><a href="{% url 'menu:menu' item.slug %}" title="{{ item.name }}">{{ item.name }}</a></strong>
+                        </div>
+                        <!-- /.awe-media-body -->
+                    </div>
+                    <!-- /.awe-media -->
+                </div>
+            {% endif %}
+        {% endfor %}
+    </div>
+
+    </div>
+</section>

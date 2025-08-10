@@ -1,0 +1,44 @@
+<div class="recommended_items">
+    <h2 class="title text-center">Related products</h2>
+    <div id="recommended-item-carousel" class="carousel slide" data-ride="carousel">
+        <div class="carousel-inner">
+            <div class="item active">
+
+                {% for sub_product in recommendation_product_list %} %}
+                        <div class="col-sm-4">
+                            <div class="product-image-wrapper">
+                                <div class="single-products">
+                                    <div class="productinfo text-center">
+                                        <a href="{{ sub_product.get_absolute_url }}"><img src="{{ media_url }}{{ sub_product.image }}" alt="{{ sub_product.name }}" /></a>
+                                        {% comment %} <h2>{{ sub_product.price|currency:LANGUAGE_CODE }}</h2> {% endcomment %}
+                                        <p>{{ sub_product.name }}</p>
+                                        <form method="post" id="sub_form_{{ sub_product.slug }}" action=""  class="" >
+                                            {% csrf_token %}
+                                            <input type="hidden"  id="id_quantity" maxlength="5" name="quantity" size="2"  value="1" />
+                                            <input type="hidden" name="product_slug" value="{{ sub_product.slug }}"/>
+                                            <input type="submit" class="btn btn-fefault add-to-cart" title="{{ add_cart }}" value="{{ add_cart }}"  name="submit" alt=""/>
+                                        </form>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    {% if forloop.counter|divisibleby:3 and forloop.revcounter > 1 %}
+                        </div>
+                        <div class="item">
+                    {% endif %}
+                {% empty %}
+                    No related products.
+                {% endfor %}
+            </div>
+{#        {% if product.cross_sells_hybrid|length > 3 %}#}
+{#         <a class="left recommended-item-control" href="#recommended-item-carousel" data-slide="prev">#}
+{#            <i class="fa "><</i>#}
+{#          </a>#}
+{#          <a class="right recommended-item-control" href="#recommended-item-carousel" data-slide="next">#}
+{#            <i class="fa ">></i>#}
+{#          </a>#}
+{#        {% endif %}#}
+    </div>
+</div><!--/recommended_items-->
+</div>

@@ -1,0 +1,37 @@
+<section>
+        <div class="container">
+            <div class="padding-vertical-50"></div>
+            {% if not sliders and not text_blocks_menu %}
+                <div class="section-header center">
+                    <h2>{{ current_menu.name }}</h2>
+                    {% if current_menu.description %}
+                        {{ current_menu.description|safe }}
+                    {% endif %}
+                </div>
+            {% endif %}
+
+
+                    <span id="shop_now" name="shop_now"/>
+{#                            <div class="products scroll">#}
+                            <div class="row">
+                                {% for product in products_category %}
+                                    {% include "tags/product_thumbnail_table.html" %}
+                                {% endfor %}
+                            </div>
+                        <!-- /.row -->
+
+                        <!-- /.section-header -->
+{#                            <div class="products scroll">#}
+                            <div class="row">
+                                {% for product in current_menu.get_sales %}
+                                    {% include "block/block_product_hit.html" %}
+                                    {% if forloop.counter|divisibleby:4 %}
+                                        </div>
+                                        <div class="row">
+                                    {% endif %}
+                                {% endfor %}
+                            </div>
+
+    </div>
+    <!-- /.container -->
+</section>

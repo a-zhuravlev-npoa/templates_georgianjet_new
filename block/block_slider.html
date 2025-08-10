@@ -1,0 +1,37 @@
+<section>
+        <div class="main-slider-wrapper">
+            <div class="main-slider owl-carousel owl-carousel-inset">
+
+                {% for item in slider_list %}
+                    {% if item.order_number == 0 %}
+                    <div class="main-slider-item">
+                        <div class="main-slider-image">
+                            <img src="{{ media_url }}{{ item.image }}" alt="{{ item.name }}">
+                        </div>
+
+                        <div class="main-slider-text col-md-offset-1">
+                            <div class="fp-table">
+                                <div class="fp-table-cell">
+                                    <div class="container left">
+                                        {% if item.title_dop %}
+                                            <div style="font-size: 18px;text-transform: uppercase;color:  {% if item.text_color %}{{ item.text_color }}{% else %}#000{% endif %};">{{ item.title_dop }}</div>
+                                        {% endif %}
+                                        <h3 style="font-size: 38px;font-weight: normal;  color: {% if item.text_color %}{{ item.text_color }}{% else %}#000{% endif %};">{{ item.name }}</h3>
+                                            {% if item.text %}
+                                            <h3 style="font-size: 14px;font-weight: normal; text-transform: uppercase;color:  {% if item.text_color %}{{ item.text_color }}{% else %}#000{% endif %};">{{ item.text }}</h3>
+                                            {% endif %}
+                                        <div class="hidden-xs" style="padding: 30px;"> </div>
+                                        <div class="button" >
+                                            <a href="{{ item.url }}" style="background-color: #2a6496; border-color: darkblue;" class="btn btn-lg btn-primary margin-right-15">{{ item.button_text }}</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    {% endif %}
+                {% endfor %}
+            </div>
+        </div>
+
+    </section>

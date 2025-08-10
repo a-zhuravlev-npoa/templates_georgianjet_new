@@ -1,0 +1,27 @@
+.sendsubmit {
+    width: 16px;
+    height: 16px;
+    margin: 0;
+    padding: 0;
+    border: 0;
+    background: transparent url("../images/cart/cart.png") no-repeat center top;
+    text-indent: -1000em;
+    cursor: pointer;
+    cursor: hand;
+}
+
+.sendsubmit:hover {
+    background: transparent url("../images/cart/cart_over.png") no-repeat center top;
+}
+
+.removesubmit {
+    width: 16px;
+    height: 16px;
+    margin: 0;
+    padding: 0;
+    border: 0;
+    background: transparent url("../images/cart/remove.png") no-repeat center top;
+    text-indent: -1000em;
+    cursor: pointer;
+    cursor: hand;
+}

@@ -1,0 +1,79 @@
+<script>
+    function product_add(product_id, input_option, input_quantity, input_comment)
+    {
+      const formData = new FormData();
+      formData.append('product_id', product_id);
+      if(document.getElementById(input_option)){
+        formData.append('option', document.getElementById(input_option).value);
+      }
+      if(document.getElementById(input_quantity)){
+        formData.append('quantity', document.getElementById(input_quantity).value);
+      }
+      if(document.getElementById(input_comment)){
+        formData.append('comment', document.getElementById(input_comment).value);
+      }
+
+      $.ajax({
+          url: '/cart/product_add',
+          method: 'POST',
+          data: formData,
+          processData: false,
+          contentType: false,
+          success: function (data) {
+              get_cart_count();
+              const button = document.getElementById(product_id);
+              button.innerHTML = "В корзине";
+              button.disabled = true;
+              button.style.color = "#000000";
+              button.style.fontWeight = 500;
+              {% comment %} document.getElementById('basket__products').innerHTML = data['cart_content'];{% endcomment %}
+          },
+          error: function () {
+              console.log('При обработке запроса возникли ошибки product_add');
+          },
+      })
+    }
+
+    function product_del(item_id) {
+      const formData = new FormData();
+      formData.append('item_id', item_id);
+      $.ajax({
+          url: '/cart/product_del',
+          method: 'POST',
+          data: formData,
+          processData: false,
+          contentType: false,
+          success: function (data) {
+              get_cart_count();
+              document.getElementById(item_id).remove();
+              {% comment %} document.getElementById('cart_content').innerHTML = data['cart_content']; {% endcomment %}
+          },
+          error: function () {
+              alert('Возникла ошибка: ' + xhr.responseCode);
+          },
+      })
+  }
+
+  function product_set_param(item_id, count, comment) {
+      const formData = new FormData();
+      formData.append('item_id', item_id);
+      if(count){
+        formData.append('quantity', count);
+      }
+      else{
+        formData.append('comment', comment);
+      }
+      $.ajax({
+          url: '/cart/product_set_param',
+          method: 'POST',
+          data: formData,
+          processData: false,
+          contentType: false,
+          success: function (data) {
+          },
+          error: function () {
+              alert('Возникла ошибка: ' + xhr.responseCode);
+          },
+      })
+  }
+</script>

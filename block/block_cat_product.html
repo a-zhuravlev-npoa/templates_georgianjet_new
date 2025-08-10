@@ -1,0 +1,39 @@
+{% if 'slide' in current_menu.dop_param_1 %}
+<section>
+        <div class="main-slider-wrapper">
+            <div class="main-slider owl-carousel owl-carousel-inset">
+                    <div class="main-slider-item">
+                        <div class="main-slider-image">
+                            <img src="{{ media_url }}{{ current_menu.image }}" alt="{{ current_menu.name }}">
+                        </div>
+
+                        <div class="main-slider-text col-md-offset-1">
+                            <div class="fp-table">
+                                <div class="fp-table-cell">
+                                    <div class="container left">
+                                        {{ current_menu.text_short | safe }}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+            </div>
+        </div>
+</section>
+{% endif %}
+<section>
+    <div class="container">
+        <div class="padding-vertical-50"></div>
+        {% if not 'slide' in current_menu.dop_param_1 %}
+        <div class="section-header center">
+                        <h2>{{ current_menu.name }}</h2>
+                        {% if current_menu.description %}
+                            {{ current_menu.description|safe }}
+                        {% endif %}
+                    </div>
+        {% endif %}
+        {% for product in current_menu.get_products %}
+            {% include 'block/block_product_hit.html' %}
+        {% endfor %}
+    </div>
+</section>

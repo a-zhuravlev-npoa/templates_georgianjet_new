@@ -1,0 +1,66 @@
+<section>
+        <div class="container" style="margin-bottom: -100px;">
+            <div class="padding-vertical-50">
+
+                <div class="arrivals">
+                    <!-- /.section-header -->
+                    <div class="products home-products owl-carousel" data-items="4">
+
+                        {% for product in product_list %}
+                             <div class="product product-grid">
+                                <div class="product-media">
+                                    <div class="product-thumbnail">
+                                        <a href="{% url 'menu:product' product.slug %}" title="">
+                                            <img src="{{ media_url }}{{ product.image }}" alt="{{ product.name }}" class="current">
+                                        </a>
+                                    </div>
+                                    <!-- /.izdelie-thumbnail -->
+
+
+                                    <div class="product-hover">
+                                        <div class="product-actions">
+
+                                                    <div  class="awe-button product-add-cart" data-toggle="tooltip"  title="Add to cart%}">
+                                                    <form method="post" id="form_{{ product.slug }}" action=""  class="cart" >
+                                                        {% csrf_token %}
+                                                        <input type="hidden" class="quantity" id="id_quantity" maxlength="5" name="quantity" size="2"  value="1" />
+                                                        <input type="hidden" name="product_slug" value="{{ product.slug }}"/>
+                                                        <input type="submit" class="sendsubmit"   data-toggle="tooltip" title="dd to cart"   name="submit" alt=""/>
+                                                    </form>
+                                                         </div>
+
+                                            <a href="{% url 'menu:product' product.slug %}" class="awe-button product-quick-view" data-toggle="tooltip"
+                                               title="Quickview">
+                                                <i class="icon icon-eye"></i>
+                                            </a>
+                                        </div>
+
+                                    </div>
+
+                                </div>
+
+
+                                <div class="product-body center">
+                                    <h2 class="" style="font-size:14px;">
+                                        <a href="{% url 'menu:product' product.slug %}" title="{{ product.name }}">{{ product.name }}</a>
+                                    </h2>
+                                    <!-- /.izdelie-izdelie -->
+
+                                    <!-- /.izdelie-category -->
+
+                                    <div class="product-price">
+
+                                    </div>
+                                    <!-- /.izdelie-price -->
+                                </div>
+                             </div>
+                                <!-- /.izdelie-body -->
+                        {% endfor %}
+                    </div>
+                </div>
+                    <!-- /.products -->
+            </div>
+                <!-- /.arrivals -->
+        </div>
+        <!-- /.container -->
+    </section>

@@ -1,0 +1,36 @@
+{% extends "site_wrapper.html" %}
+{% load nospaces %}
+{% load catalog_tags %}
+{% block meta_description %}{% nospaces %}
+    {{ page_meta_description }}
+{% endnospaces %}{% endblock %}
+{% block meta_description_og %}{% nospaces %}
+    {{ page_meta_description }}
+{% endnospaces %}{% endblock %}
+{% block meta_keywords %}{% nospaces %}
+    {{ page_meta_keywords }}
+{% endnospaces %}{% endblock %}
+{% block title_page %}{% nospaces %}
+    {{ page_title }}
+{% endnospaces %}{% endblock %}
+{% block title_page_og %}{% nospaces %}
+    {{ page_title }}
+{% endnospaces %}{% endblock %}
+{% block content %}
+<link href="{{ static_url }}css/content/main.css" rel="stylesheet">
+    <section id="cart_items">
+		<div class="container">
+			<div class="breadcrumbs">
+				<ol class="breadcrumb">
+				  <li>{{ cart }}</li>
+				</ol>
+			</div>
+			<div class="table-responsive cart_info" id="cart_content">
+                {% include 'block/block_cart.html' %}
+			</div>
+		</div>
+	</section> <!--/#cart_items-->
+{% endblock %}
+{% block extra_scripts %}
+  {% include 'element/product_cart_script.html'%}
+{% endblock %}

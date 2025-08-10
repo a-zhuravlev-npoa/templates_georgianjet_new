@@ -1,0 +1,39 @@
+{% extends "site_wrapper.html" %}
+{% load nospaces %}
+{% load catalog_tags %}
+{% block meta_description %}{% nospaces %}
+    {{ page_meta_description }}
+{% endnospaces %}{% endblock %}
+{% block meta_description_og %}{% nospaces %}
+    {{ page_meta_description }}
+{% endnospaces %}{% endblock %}
+{% block meta_keywords %}{% nospaces %}
+    {{ page_meta_keywords }}
+{% endnospaces %}{% endblock %}
+{% block title_page %}{% nospaces %}
+    {{ page_title }}
+{% endnospaces %}{% endblock %}
+{% block title_page_og %}{% nospaces %}
+    {{ page_title }}
+{% endnospaces %}{% endblock %}
+{% block content %}
+    {% if current_menu.get_products %}
+        {% include 'block/block_cat_product.html' %}
+        <div id="main">
+        <section>
+            {{ page_text | safe }}
+        </section>
+    </div>
+    {% else %}
+        {% if not current_menu.parent %}
+            {% include 'block/block_catalog.html' %}
+            {% include 'block/block_slider_catalog.html' %}
+            {% if current_menu.get_sales %}
+                {% include 'block/block_hit.html' %}
+            {% endif %}
+        {% endif %}
+    {% endif %}
+{% endblock %}
+{% block extra_scripts %}
+  {% include 'element/product_cart_script.html'%}
+{% endblock %}

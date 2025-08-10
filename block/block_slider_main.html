@@ -1,0 +1,115 @@
+<div id="wrapper" class="pt_storefront">
+    <div id="main" role="main">
+        <div class="homepagerows">
+                <div class="category-row">
+                    {% for item in slider_list %}
+                        {% if item.order_number != 0 %}
+                            {% if item.order_number == 1 %}
+                                <div class="category-column  category-row-wide">
+                                    <div style="background-image: url({{ media_url }}{{ item.image }}); height: 460px;">
+                                        <div class="text-placement-right">
+                                            <div class="cta text-placement-top text-alignment-center">
+                                                <div class="title-cta lead" style="font-family: Arial; font-size: 18px; font-variant:small-caps; font-weight: normal; color: {{ item.text_color }}">
+                                                    {{ item.name|safe }}
+                                                </div>
+
+                                                <a href="{{ item.url }}" class="bottom"
+                                                   style="color: {{ item.text_color }};font-family: Arial;font-weight: normal;  border: 1px solid {{ item.text_color }}; ">
+                                                    {{ item.button_text }}
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            {% elif item.order_number == 2 %}
+                                <div class="category-column  ">
+                                    <div style="background-image: url({{ media_url }}{{ item.image }}); height: 460px;">
+                                        <div class="text-placement-center">
+                                            <div class="cta text-placement-top text-alignment-center">
+                                                <div class="title-cta lead" style="font-family: Arial; font-size: 18px; font-variant:small-caps; font-weight: normal; color: {{ item.text_color }}">
+                                                    {{ item.name|safe }}
+                                                </div>
+
+                                                <a href="{{ item.url }}" class="bottom"
+                                                   style="color: {{ item.text_color }};font-family: Arial;font-weight: normal;  border: 1px solid {{ item.text_color }}; ">
+                                                    {{ item.button_text }}
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            {% elif item.order_number == 3 %}
+                                <div class="category-column  rowNum1">
+                                    <div style="background-image: url({{ media_url }}{{ item.image }}); height: 460px;">
+                                        <div class="text-placement-center">
+                                            <div class="cta text-placement-top text-alignment-center">
+                                                <div class="title-cta lead" style="font-family: Arial; font-size: 18px; font-variant:small-caps; font-weight: normal; color: {{ item.text_color }}">
+                                                    {{ item.name|safe }}
+                                                </div>
+
+                                                <a href="{{ item.url }}" class="bottom"
+                                                   style="color: {{ item.text_color }};font-family: Arial;font-weight: normal;  border: 1px solid {{ item.text_color }}; ">
+                                                    {{ item.button_text }}
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            {% elif item.order_number == 4 %}
+                                <div class="category-column  rowNum2 category-row-wide">
+                                    <div style="background-image: url({{ media_url }}{{ item.image }}); height: 460px;">
+                                        <div class="text-placement-left">
+                                            <div class="cta text-placement-top text-alignment-left">
+                                                <div class="title-cta lead" style="font-family: Arial; font-size: 18px; font-variant:small-caps; font-weight: normal; color: {{ item.text_color }}">
+                                                    {{ item.name|safe }}
+                                                </div>
+
+                                                <a href="{{ item.url }}" class="bottom"
+                                                   style="color: {{ item.text_color }};font-family: Arial;font-weight: normal;  border: 1px solid {{ item.text_color }}; ">
+                                                    {{ item.button_text }}
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            {% elif item.order_number == 5 %}
+                                <div class="category-column  rowNum1 category-row-wide">
+                                    <div style="background-image: url({{ media_url }}{{ item.image }}); height: 460px;">
+                                        <div class="text-placement-right">
+                                            <div class="cta text-placement-top text-alignment-center">
+                                                <div class="title-cta lead" style="font-family: Arial; font-size: 18px; font-variant:small-caps; font-weight: normal; color: {{ item.text_color }}">
+                                                    {{ item.name|safe }}
+                                                </div>
+
+                                                <a href="{{ item.url }}" class="bottom"
+                                                   style="color: {{ item.text_color }};font-family: Arial;font-weight: normal;  border: 1px solid {{ item.text_color }}; ">
+                                                    {{ item.button_text }}
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            {% elif item.order_number == 6 %}
+                                <div class="category-column  rowNum2">
+                                    <div style="background-image: url({{ media_url }}{{ item.image }}); height: 460px;">
+                                        <div class="text-placement-right">
+                                            <div class="cta text-placement-top text-alignment-center">
+                                                <div class="title-cta lead" style="font-family: Arial; font-size: 18px; font-variant:small-caps; font-weight: normal; color: {{ item.text_color }}">
+                                                    {{ item.name|safe }}
+                                                </div>
+
+                                                <a href="{{ item.url }}" class="bottom"
+                                                   style="color: {{ item.text_color }};font-family: Arial;font-weight: normal;  border: 1px solid {{ item.text_color }}; ">
+                                                    {{ item.button_text }}
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                             {% endif %}
+                        {% endif %}
+                    {% endfor %}
+            </div>
+        </div>
+    </div>
+ </div>

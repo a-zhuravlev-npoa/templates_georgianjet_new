@@ -1,0 +1,64 @@
+    <ul class="submenu megamenu">
+        <li>
+            <div class="container-fluid">
+
+                <ul class="whishlist">
+                    {% for item in cart_items %}
+                        {% with item.product as product %}
+                            <li>
+                                <div class="whishlist-item">
+                                    <div class="product-image">
+                                        <a href="{% url 'menu:product' product.slug %}" title="">
+                                            <img src="{{ media_url }}{{ product.image }}" alt="{{ product.name }}">
+                                        </a>
+                                    </div>
+
+                                    <div class="product-body">
+                                        <div class="whishlist-name">
+                                            <h3><a href="{% url 'menu:product' product.slug %}" title="">{{ product.name }}</a></h3>
+                                        </div>
+
+                                        <div class="whishlist-price">
+                                            {% comment %} <span>{% trans "Price" %}:</span> {% endcomment %}
+                                            {% comment %} <strong>{{ item.product.price|currency:LANGUAGE_CODE }}</strong> {% endcomment %}
+                                        </div>
+
+                                        <div class="whishlist-quantity">
+                                            <span>{{ quantity }}:</span>
+                                            <span>{{ item.quantity }}</span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <a href="#" title="" class="remove">
+                                    <input type="hidden" name="item_id" value="{{ item.id }}"/>
+                                    <input class="removesubmit" type="button" name="submit" value="X"onclick="product_del({{ item.id }})">
+                                </a>
+        {#                        <a href="#" title="" class="remove">#}
+        {#                            <i class="icon icon-remove"></i>#}
+        {#                        </a>#}
+                            </li>
+                        {% endwith %}
+                    {% endfor %}
+                </ul>
+            {% if cart_item_count > 3 %}
+                {% with cart_item_count as cart_count %}
+                    <a href="/cart">
+                        {{ shopping_cart }}:
+                        {{ cart_count }} {{ item }} {{ cart_count|pluralize }}
+                    </a>
+                {% endwith %}
+            {% endif %}
+
+                {% comment %} <div class="menu-cart-total">
+                    <span>{% trans "Total" %}</span>
+                    <span class="price">{{ cart_subtotal|currency:LANGUAGE_CODE  }}</span>
+                </div> {% endcomment %}
+
+                <div class="cart-action">
+                    <a href="/cart" title="" class="btn btn-lg btn-dark btn-outline btn-block">{{ cart }}</a>
+                    <a href="/checkout" title="" class="btn btn-lg btn-primary btn-block">{{ checkout_order }}</a>
+                </div>
+            </div>
+        </li>
+    </ul>
