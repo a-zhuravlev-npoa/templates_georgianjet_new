@@ -17,7 +17,37 @@
     {{ page_title }}
 {% endnospaces %}{% endblock %}
 {% block content %}
+     <section>
+        <div class="container">
+            <div class="padding-vertical-50 border-bottom">
+                <div class="section-header center">
+                    <h1>Результаты поиска: '{{ search_text }}'</h1>
+                </div>
+                    <!-- /.section-header -->
+{#                <div class="products scroll">#}
+                    <div class="row">
+                        {% for product in product_list %}
+                            {% include 'block/block_product_hit.html' %}
 
+{#                            {% if forloop.counter|divisibleby:4 %}#}
+{#                                </div>#}
+{#                                <div class="row">#}
+{#                            {% endif %}#}
+                        {% empty %}
+                            No products were found matching those search terms.
+                        {% endfor %}
+                        <div class="cb">&nbsp;</div>
+                        {% pagination_links request paginator %}
+
+                    </div>
+                    <!-- /.row -->
+{#                </div>#}
+                <!-- /.products -->
+            </div>
+            <!-- /.padding-vertical-50 -->
+        </div>
+        <!-- /.container -->
+    </section>
 {% endblock %}
 {% block extra_scripts %}
   {% include 'element/product_cart_script.html'%}

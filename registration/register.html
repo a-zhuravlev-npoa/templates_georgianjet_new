@@ -1,0 +1,79 @@
+{% extends "site_wrapper.html" %}
+{% load nospaces %}
+{% load catalog_tags %}
+{% block meta_description %}{% nospaces %}
+    {{ page_meta_description }}
+{% endnospaces %}{% endblock %}
+{% block meta_description_og %}{% nospaces %}
+    {{ page_meta_description }}
+{% endnospaces %}{% endblock %}
+{% block meta_keywords %}{% nospaces %}
+    {{ page_meta_keywords }}
+{% endnospaces %}{% endblock %}
+{% block title_page %}{% nospaces %}
+    {{ page_title }}
+{% endnospaces %}{% endblock %}
+{% block title_page_og %}{% nospaces %}
+    {{ page_title }}
+{% endnospaces %}{% endblock %}
+{% block content %}
+<section id="cart_items">
+		<div class="container">
+    <form action="{% url "accounts:register" %}" method="post" class="" enctype="multipart/form-data">
+            {% csrf_token %}
+         <input type="hidden" name="robot" value=""/>
+        <div class="form__content">
+            <div class="form__list">
+                <label class="form-input">
+                    {{ form.username }}
+                </label>
+                <label class="form-input">
+                    {{ form.fio }}
+                </label>
+                <label class="form-input">
+                    {{ form.email }}
+                </label>
+                <label class="form-input">
+                    {{ form.password1 }}
+                </label>
+                <label class="form-input">
+                    {{ form.password2 }}
+                </label>
+                <label class="form-input">
+                    {{ form.city_sys }}
+                </label>
+                <label class="form-input">
+                    {{ form.inn }}
+                </label>
+                <label class="form-input">
+                    {{ form.phone }}
+                </label>
+                <label class="form-input">
+                    {{ form.organization }}
+                </label>
+            </div>
+            <label class="form-file js-file-input">
+                <input type="file" name="file" class="form-file__input">
+                <span class="form-file__title">
+                    Карточка компании:
+                </span>
+                <span class="form-file__label">
+                    <span class="form-file__checkmark">
+                        Прикрепить файл
+                    </span>
+                    <span class="form-file__text js-file-input-name">
+                        Файл не выбран
+                    </span>
+                </span>
+            </label>
+        </div>
+        <div class="form__buttons">
+            <button type="submit"
+                    class="form__button form__button--full form__button--uppercase button button--accent">
+                Зарегистрироваться
+            </button>
+        </div>
+    </form>
+            </div>
+        </section>
+{% endblock %}

@@ -1,0 +1,46 @@
+{% extends "site_wrapper.html" %}
+{% load nospaces %}
+{% load catalog_tags %}
+{% block meta_description %}{% nospaces %}
+    {{ page_meta_description }}
+{% endnospaces %}{% endblock %}
+{% block meta_description_og %}{% nospaces %}
+    {{ page_meta_description }}
+{% endnospaces %}{% endblock %}
+{% block meta_keywords %}{% nospaces %}
+    {{ page_meta_keywords }}
+{% endnospaces %}{% endblock %}
+{% block title_page %}{% nospaces %}
+    {{ page_title }}
+{% endnospaces %}{% endblock %}
+{% block title_page_og %}{% nospaces %}
+    {{ page_title }}
+{% endnospaces %}{% endblock %}
+{% block content %}
+<section id="cart_items">
+		<div class="container">
+    <h1>{{ my_account }}</h1>
+    <strong>{{ welcome }}, {{ name|capfirst }}!</strong>
+    <br/><br/>
+    <fieldset class="my_account">
+        <legend>{{ order_history }}</legend>
+        {% for order in orders %}
+            <a href="{{ order.get_absolute_url }}">
+                {{ order }} #{{ order.id }} - {{ order.date|date }} (view)
+            </a>
+            <br/>
+        {% empty %}
+            {{ null_order }}
+        {% endfor %}
+    </fieldset>
+    <br/>
+    <fieldset class="my_account">
+        <legend>{{ account_settings }}</legend>
+        <ul>
+{#            <li><a href="{% url "django.contrib.auth.views.password_change" %}">{{ change_pswd }}</a></li>#}
+{#            <li><a href="{% url "order_info" %}">Edit Billing/Shipping Information</a></li>#}
+        </ul>
+    </fieldset>
+        </div>
+        </section>
+{% endblock %}

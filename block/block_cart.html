@@ -1,3 +1,4 @@
+{% load catalog_tags %}
 <table class="table table-condensed">
         <thead>
             <tr class="cart_menu">
@@ -25,13 +26,10 @@
                     </td>
                     <td class="cart_quantity">
                         <div class="cart_quantity_button">
-                            <form method="post" action="." class="">
                             {% csrf_token %}
-                            <input type="text" class="cart_quantity_input"  name="quantity" value="{{ item.quantity }}" id="cart_item_count_{{ item.id }}"
-                                   size="2" class="quantity" maxlength="5"/>
+                             <input type="text" name="quantity" value="{{ item.quantity|my_floatformat }}" id="cart_item_count_{{ item.id }} "  onchange="product_set_param({{ item.id }}, document.getElementById('cart_item_count_{{ item.id }}').value, '')" size="2" class="quantity" maxlength="5"/>
                             <input type="hidden" name="item_id" value="{{ item.id }}"/>
                             <input type="submit" name="submit" value="{{ update }}"/>
-                            </form>
                         </div>
                     </td>
                     <td class="cart_total">

@@ -1,0 +1,51 @@
+{% extends "site_wrapper.html" %}
+{% load nospaces %}
+{% load catalog_tags %}
+{% block meta_description %}{% nospaces %}
+    {{ page_meta_description }}
+{% endnospaces %}{% endblock %}
+{% block meta_description_og %}{% nospaces %}
+    {{ page_meta_description }}
+{% endnospaces %}{% endblock %}
+{% block meta_keywords %}{% nospaces %}
+    {{ page_meta_keywords }}
+{% endnospaces %}{% endblock %}
+{% block title_page %}{% nospaces %}
+    {{ page_title }}
+{% endnospaces %}{% endblock %}
+{% block title_page_og %}{% nospaces %}
+    {{ page_title }}
+{% endnospaces %}{% endblock %}
+{% block content %}
+            <section id="cart_items">
+		<div class="container">
+    {% if form.errors %}
+        <ul class="errorlist">
+            <li>{{ invalid_login }}</li>
+        </ul>
+        <br/>
+    {% endif %}
+    <form role="form" action="" method="post">
+
+            {% csrf_token %}
+            <input type="hidden" name="next" value="{% url 'accounts:account' %}"/>
+            <caption>{{ login }}</caption>
+                <div class="form__content">
+                        <div class="form__list">
+                            <label  class="form-input">
+                                <input type="text" id="username" name="username" placeholder="Логин">
+                            </label>
+                            <label  class="form-input">
+                                <input type="password" id="password" name="password" placeholder="Пароль">
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="form__buttons">
+                        <button class="form__button form__button--uppercase button button--accent">Войти</button>
+                        <a href="{% url 'accounts:register' %}" style="text-decoration: underline;">Регистрация</a>
+                </div>
+    </form>
+        </div>
+        </section>
+{% endblock %}
